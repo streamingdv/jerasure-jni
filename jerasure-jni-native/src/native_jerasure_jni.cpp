@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <cauchy.h>
 #include <jerasure.h>
+#include <functional>
 #include <map>
 
 using namespace std;
