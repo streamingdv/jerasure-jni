@@ -1,0 +1,4 @@
+rootProject.name = 'jerasure-jni'
+include 'jerasure-jni-native'
+include 'jerasure-jni-java'
+

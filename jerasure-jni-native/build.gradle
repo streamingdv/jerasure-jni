@@ -1,0 +1,41 @@
+import io.karma.gradlecm.CMakeBuildTask
+import io.karma.gradlecm.CMakeConfigureTask
+import org.apache.tools.ant.taskdefs.condition.Os
+
+buildscript {
+    dependencies {
+        classpath files("gradle-cmake-1.0.1.0.jar")
+    }
+}
+
+apply plugin: "io.karma.gradlecm.gradle-cmake"
+
+tasks.register('configure', CMakeConfigureTask) {
+    sourceFolder = file(".")
+    workingFolder = new File(buildDir, "cmake-gen")
+
+    if (is32bit) {
+        if (!Os.isFamily(Os.FAMILY_WINDOWS)) {
+            throw new GradleException("Only windows supports 32bit currently")
+        } else {
+            platform = "Win32"
+            toolset = "host=x64"
+        }
+    } else if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        platform = "x64"
+        toolset = "host=x64"
+    }
+
+    defs.CMAKE_BUILD_TYPE = "Release"
+    defs.CMAKE_RUNTIME_OUTPUT_DIRECTORY = nativeBinariesDir.absolutePath
+    defs.CMAKE_LIBRARY_OUTPUT_DIRECTORY = nativeBinariesDir.absolutePath
+    defs.CMAKE_ARCHIVE_OUTPUT_DIRECTORY = nativeBinariesDir.absolutePath
+    defs.GENERATED_JNI_HEADERS_DIR = generatedHeadersDir.absolutePath
+}
+
+tasks.register('build', CMakeBuildTask) {
+    sourceFolder = file(".")
+    workingFolder = new File(buildDir, "cmake-gen")
+}
+
+build.dependsOn configure

@@ -1,0 +1,60 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.grill.jerasure",
+    "module": "jerasure-jni-java",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.5.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "jerasure-jni-java-1.0.0.jar",
+          "url": "jerasure-jni-java-1.0.0.jar",
+          "size": 455247,
+          "sha512": "a2c27d2db430c5cd855efe9b9ba0a11283de714ec66eb6537b8452074f05d7a4580cc9b18bd1d14546c4c288c7702418fcf2d0c967c19fc8d056357ce2f73c49",
+          "sha256": "db86f068f2d2af05d6c42adeca496081545606febbe4ef35568b3e53ecc4da2d",
+          "sha1": "9df12bd917911aaf163e67e46bf211e36d4c219b",
+          "md5": "bf4bc9b8e0dd09b8e97eb0f65bf2354e"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "jerasure-jni-java-1.0.0.jar",
+          "url": "jerasure-jni-java-1.0.0.jar",
+          "size": 455247,
+          "sha512": "a2c27d2db430c5cd855efe9b9ba0a11283de714ec66eb6537b8452074f05d7a4580cc9b18bd1d14546c4c288c7702418fcf2d0c967c19fc8d056357ce2f73c49",
+          "sha256": "db86f068f2d2af05d6c42adeca496081545606febbe4ef35568b3e53ecc4da2d",
+          "sha1": "9df12bd917911aaf163e67e46bf211e36d4c219b",
+          "md5": "bf4bc9b8e0dd09b8e97eb0f65bf2354e"
+        }
+      ]
+    }
+  ]
+}
