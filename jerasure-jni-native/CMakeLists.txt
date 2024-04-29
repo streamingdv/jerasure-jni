@@ -9,6 +9,11 @@ cmake_policy(SET CMP0048 NEW)
 #####################
 set(CMAKE_OSX_DEPLOYMENT_TARGET "10.10" CACHE STRING "Minimum OS X deployment version" FORCE)
 
+# Ensure the build type is always Release
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release CACHE STRING "Set the build type to Release by default" FORCE)
+endif()
+
 #################
 # Project setup #
 #################
