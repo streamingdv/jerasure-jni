@@ -6,7 +6,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        os: [ubuntu-latest]
 
     name: ${{ matrix.os }} build
     runs-on: ${{ matrix.os }}

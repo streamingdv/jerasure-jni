@@ -4,6 +4,22 @@
 cmake_policy(SET CMP0091 NEW)
 cmake_policy(SET CMP0048 NEW)
 
+###################
+# Set architecture #
+###################
+if(APPLE)
+    if(${CMAKE_OSX_ARCHITECTURES} STREQUAL "x86_64")
+        message(STATUS "Building for x86_64")
+        set(CMAKE_OSX_ARCHITECTURES "x86_64" CACHE STRING "Build architectures for Mac" FORCE)
+    elseif(${CMAKE_OSX_ARCHITECTURES} STREQUAL "arm64")
+        message(STATUS "Building for arm64")
+        set(CMAKE_OSX_ARCHITECTURES "arm64" CACHE STRING "Build architectures for Mac" FORCE)
+    else()
+        message(STATUS "Fallback to arm64")
+        set(CMAKE_OSX_ARCHITECTURES "arm64" CACHE STRING "Build architectures for Mac" FORCE)
+    endif()
+endif()
+
 #####################
 # Pre project setup #
 #####################
@@ -13,6 +29,9 @@ set(CMAKE_OSX_DEPLOYMENT_TARGET "10.10" CACHE STRING "Minimum OS X deployment ve
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release CACHE STRING "Set the build type to Release by default" FORCE)
 endif()
+
+# Ensure the build type is always Release
+set(CMAKE_BUILD_TYPE Release CACHE STRING "Force the build type to Release" FORCE)
 
 #################
 # Project setup #
@@ -62,11 +81,11 @@ target_include_directories(jerasure-jni-native PUBLIC ${JNI_INCLUDE_DIRS} ${GENE
 if(MSVC)
     set_property(
             TARGET jerasure
-            PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreadedDebug"
+            PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded"
     )
 
     set_property(
             TARGET jerasure-jni-native
-            PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreadedDebug"
+            PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded"
     )
 endif()

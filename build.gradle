@@ -89,15 +89,21 @@ def processBinary(File binary, boolean doMove) {
     String extension = getExtension(binary)
     String path = getPathWithoutExtension(binary)
 
-    File newPath = null
-    if(ext.is32bit) {
+    File newPath
+    if (Os.isFamily(Os.FAMILY_MAC)) {
+        if (project.hasProperty('arch') && project.arch == 'arm64') {
+            newPath = new File(path + "-arm64." + extension)
+        } else if (project.hasProperty('arch') && project.arch == 'x86_64') {
+            newPath = new File(path + "-x86_64." + extension)
+        }
+    } else if (ext.is32bit) {
         newPath = new File(path + "-32." + extension)
     } else {
         newPath = new File(path + "-64." + extension)
     }
 
-    if(doMove) {
-        println "Moving ${binary.absolutePath} to ${newPath.absolutePath}"
+    if (doMove) {
+        println "Rename ${binary.absolutePath} to ${newPath.absolutePath}"
         binary.renameTo(newPath)
     }
 

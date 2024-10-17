@@ -16,7 +16,7 @@ tasks.register('configure', CMakeConfigureTask) {
 
     if (is32bit) {
         if (!Os.isFamily(Os.FAMILY_WINDOWS)) {
-            throw new GradleException("Only windows supports 32bit currently")
+            throw new GradleException("Only Windows supports 32-bit currently")
         } else {
             platform = "Win32"
             toolset = "host=x64"
@@ -24,6 +24,12 @@ tasks.register('configure', CMakeConfigureTask) {
     } else if (Os.isFamily(Os.FAMILY_WINDOWS)) {
         platform = "x64"
         toolset = "host=x64"
+    } else if (Os.isFamily(Os.FAMILY_MAC)) {
+        if (project.hasProperty('arch') && project.arch == 'arm64') {
+            defs.CMAKE_OSX_ARCHITECTURES = "arm64"
+        } else if (project.hasProperty('arch') && project.arch == 'x86_64') {
+            defs.CMAKE_OSX_ARCHITECTURES = "x86_64"
+        }
     }
 
     defs.CMAKE_BUILD_TYPE = "Release"
