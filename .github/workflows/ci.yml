@@ -89,7 +89,7 @@ jobs:
         with:
           java-version: 8
       - name: Download existing artifacts
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v3
         with:
           name: native-binaries
           path: native-binaries
